@@ -53,11 +53,6 @@ gsettings set org.gnome.desktop.background picture-uri-dark file://$(pwd)/tiled.
 # set icons
 gsettings set org.gnome.desktop.interface icon-theme 'Papirus'
 
-# set custom bindings
-gsettings set org.gnome.desktop.wm.keybindings close "['<Alt>Q']"
-gsettings set org.gnome.desktop.wm.keybindings minimize "['<Alt>W']"
-bash keybind.sh
-
 # install gnome extensions
 wget -O gnome-shell-extension-installer https://github.com/brunelli/gnome-shell-extension-installer/raw/master/gnome-shell-extension-installer
 chmod +x gnome-shell-extension-installer
