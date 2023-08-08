@@ -1,0 +1,15 @@
+git
+vim
+neovim
+rofi
+wget
+gnome-tweaks
+guvcview
+htop
+neofetch
+clang
+libeigen3-dev
+obs-studio
+steam
+wmctrl
+4kvideodownloader
