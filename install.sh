@@ -43,4 +43,8 @@ cp -r config/. ~/.config
 mkdir -p ~/.local/share/rofi/themes/
 cp arc-dark.rasi ~/.local/share.rofi/themes/
 
+# remove dock
+sudo apt remove gnome-shell-extension-ubuntu-dock
+
+# set custom bindings
 bash keybind.sh
