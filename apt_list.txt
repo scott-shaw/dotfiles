@@ -12,4 +12,3 @@ libeigen3-dev
 obs-studio
 steam
 wmctrl
-4kvideodownloader

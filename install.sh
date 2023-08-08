@@ -2,9 +2,9 @@
 sudo apt update && sudo apt upgrade -y
 
 # add repositories
-sudo add-apt-repository ppa:papirus/papirus
-sudo add-apt-repository multiverse
-sudo add-apt-repository universe
+sudo add-apt-repository -y ppa:papirus/papirus
+sudo add-apt-repository -y multiverse
+sudo add-apt-repository -y universe
 
 # apt
 sudo apt install -y $(cat apt_list.txt)
