@@ -26,8 +26,12 @@ mkdir -p ~/.fonts
 wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/JetBrainsMono.zip
 unzip JetBrainsMono.zip -d ~/.fonts
 fc-cache -fv
-rm JetBrainsMono.zip
+#rm JetBrainsMono.zip
 
 # remove dock
 sudo apt remove -y gnome-shell-extension-ubuntu-dock
+
+wget -O gnome-shell-extension-installer https://github.com/brunelli/gnome-shell-extension-installer/raw/master/gnome-shell-extension-installer
+chmod +x gnome-shell-extension-installer
+sudo mv gnome-shell-extension-installer /usr/bin/
 
