@@ -5,7 +5,7 @@ BEGINNING="gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-key
 KEY_PATH="/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings"
 
 gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings \
-"['$KEY_PATH/custom0/', '$KEY_PATH/custom1/', '$KEY_PATH/custom2/', '$KEY_PATH/custom3/', '$KEY_PATH/custom4/', '$KEY_PATH/custom5/']"
+"['$KEY_PATH/custom0/', '$KEY_PATH/custom1/', '$KEY_PATH/custom2/', '$KEY_PATH/custom3/', '$KEY_PATH/custom4/', '$KEY_PATH/custom5/', '$KEY_PATH/custom6/']"
 
 # Launch Alacritty
 $BEGINNING/custom0/ name "alacritty"
@@ -37,3 +37,7 @@ $BEGINNING/custom5/ name "play-pause"
 $BEGINNING/custom5/ command "playerctl play-pause"
 $BEGINNING/custom5/ binding "<Pause>"
 
+# open home folder
+$BEGINNING/custom6/ name "home folder"
+$BEGINNING/custom6/ command "nautilus"
+$BEGINNING/custom6/ binding "<Alt>Z"
