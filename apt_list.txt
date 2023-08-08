@@ -12,3 +12,8 @@ libeigen3-dev
 obs-studio
 steam
 wmctrl
+python3-venv
+nautilus-dropbox
+papirus-icon-theme
+gnome-shell-extensions
+playerctl
