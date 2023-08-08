@@ -17,3 +17,4 @@ nautilus-dropbox
 papirus-icon-theme
 gnome-shell-extensions
 playerctl
+dbus-x11
