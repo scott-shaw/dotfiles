@@ -21,3 +21,10 @@ gsettings set org.gnome.desktop.background picture-uri-dark file://$(pwd)/tiled.
 
 # set icons
 gsettings set org.gnome.desktop.interface icon-theme 'Papirus'
+
+# jetbrainsmono nerdfont
+mkdir -p ~/.fonts
+wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/JetBrainsMono.zip
+unzip JetBrainsMono.zip -d ~/.fonts
+fc-cache -fv
+#rm JetBrainsMono.zip
