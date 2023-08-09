@@ -27,12 +27,12 @@ $BEGINNING/custom2/ binding "<Shift><Alt>A"
 # Next Song
 $BEGINNING/custom3/ name "next song"
 $BEGINNING/custom3/ command "playerctl next"
-$BEGINNING/custom3/ binding "<Ctrl><Right>"
+$BEGINNING/custom3/ binding "<Ctrl>."
 
 # Prev Song
 $BEGINNING/custom4/ name "prev song"
 $BEGINNING/custom4/ command "playerctl previous"
-$BEGINNING/custom4/ binding "<Ctrl><Left>"
+$BEGINNING/custom4/ binding "<Ctrl>,"
 
 # Play/Pause Song
 $BEGINNING/custom5/ name "play-pause"
