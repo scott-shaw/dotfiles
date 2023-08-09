@@ -1,0 +1,1 @@
+sudo nvim /etc/gdm3/custom.conf
