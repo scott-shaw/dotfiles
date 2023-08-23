@@ -92,6 +92,16 @@ return {
     local capabilities = vim.lsp.protocol.make_client_capabilities()
     capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 
+    local root_files = {
+      '.clangd',
+      '.clang-tidy',
+      '.clang-format',
+      'compile_commands.json',
+      'compile_flags.txt',
+      'configure.ac', -- AutoTools
+    }
+    local util = require 'lspconfig.util'
+
     -- Clang
     require("lspconfig")["clangd"].setup({
 	on_attach = on_attach,
@@ -99,7 +109,11 @@ return {
 	cmd = {
 	    "clangd",
 	    "--offset-encoding=utf-16",
+	    "clang-tidy",
 	},
+	root_dir = function(fname)
+	    return util.root_pattern(unpack(root_files))(fname) or util.find_git_ancestor(fname)
+	end,
     })
 
 -- Lua

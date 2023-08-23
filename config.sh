@@ -28,3 +28,7 @@ wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/JetBrainsM
 unzip JetBrainsMono.zip -d ~/.fonts
 fc-cache -fv
 #rm JetBrainsMono.zip
+
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+tmux source ~/.tmux.conf
+
