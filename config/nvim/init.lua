@@ -47,10 +47,13 @@ map("n", "<C-Left>", ":tabprevious<CR>", "move to left tab")
 map("n", "<C-Right>", ":tabnext<CR>", "move to right tab")
 
 map("n", "<C-s>", ":Telescope live_grep<CR>", "search through all files")
+map("n", "<C-f>", ":Telescope find_files<CR>", "search for files")
 
 map("v", "<", "<gv")
 map("v", ">", ">gv")
 
-map("n", "<S-Left>", "^", "Go to beginning of line")
-map("n", "<S-Right>", "$", "Go to end of line")
+map("n", "<C-S-Left>", "^", "Go to beginning of line")
+map("n", "<C-S-Right>", "$", "Go to end of line")
 
+map("n", "<S-Left>", "B", "prev word")
+map("n", "<S-Right>", "W", "next word")

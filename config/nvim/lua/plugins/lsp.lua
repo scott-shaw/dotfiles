@@ -22,6 +22,7 @@ return {
 	    "pylsp",
 	    "clangd",
 	    "cmake",
+	    "jedi_language_server",
 	},
 	automatic_installation = true,
     })
@@ -147,7 +148,11 @@ return {
 		plugins = {
 		    flake8 = {
 			enabled = true,
-			maxLineLength = 88, -- Black's line length
+			maxLineLength = 999, -- Black's line length
+		    },
+		    jedi_completion = {
+			include_class_object = true,
+			fuzzy = true,
 		    },
 		    -- Disable plugins overlapping with flake8
 		    pycodestyle = {
