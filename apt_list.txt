@@ -20,3 +20,5 @@ gnome-shell-extensions
 playerctl
 dbus-x11
 ripgrep
+black
+mypy

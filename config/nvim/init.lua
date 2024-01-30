@@ -1,7 +1,7 @@
 -- ==================================================================
 -- | NEOVIM CONFIG                                                  |
 -- | Scott Shaw                                                     |
--- | Jul 20 2023                                                    |
+-- | Jan 29 2024                                                    |
 -- | Based on: https://github.com/frans-johansson/lazy-nvim-starter |
 -- ==================================================================
 
@@ -23,23 +23,23 @@ vim.o.termguicolors = true
 vim.o.signcolumn = "yes"
 
 -- persistent undos
-vim.bo.undofile=true
+vim.bo.undofile = true
 
 -- Open neotree if no file is given
 vim.api.nvim_create_augroup("neotree", {})
 vim.api.nvim_create_autocmd("UiEnter", {
-    group = "neotree",
-    callback = function()
-    if vim.fn.argc() == 0 then
-	vim.cmd [[Neotree toggle]]
-    end
-  end,
+	group = "neotree",
+	callback = function()
+		if vim.fn.argc() == 0 then
+			vim.cmd [[Neotree toggle]]
+		end
+	end,
 })
 
 -- set color scheme
 vim.cmd [[colorscheme tokyonight-night]]
 
- -- KEYBINDINGS
+-- KEYBINDINGS
 local map = require("utils.keys").map
 map("i", "jk", "<esc>")
 
@@ -57,3 +57,5 @@ map("n", "<C-S-Right>", "$", "Go to end of line")
 
 map("n", "<S-Left>", "B", "prev word")
 map("n", "<S-Right>", "W", "next word")
+
+map({ "n", "v" }, "<C-a>", "<cmd>NeoTreeRevealToggle<cr>", "Toggle file explorer")

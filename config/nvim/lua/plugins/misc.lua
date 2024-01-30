@@ -1,4 +1,3 @@
--- Miscelaneous fun stuff
 return {
 	-- Comment with haste
 	{
