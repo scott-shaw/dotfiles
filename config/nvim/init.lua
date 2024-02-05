@@ -1,8 +1,7 @@
 -- ==================================================================
 -- | NEOVIM CONFIG                                                  |
 -- | Scott Shaw                                                     |
--- | Jan 29 2024                                                    |
--- | Based on: https://github.com/frans-johansson/lazy-nvim-starter |
+-- | Feb 05 2024                                                    |
 -- ==================================================================
 
 require("utils.lazy")
@@ -38,11 +37,11 @@ vim.cmd([[colorscheme tokyonight-night]])
 local map = require("utils.keys").map
 map("i", "jk", "<esc>")
 
-map("n", "<C-Left>", ":tabprevious<CR>", "move to left tab")
-map("n", "<C-Right>", ":tabnext<CR>", "move to right tab")
+map("n", "<C-Left>", ":tabprevious<CR>", "Move to left tab")
+map("n", "<C-Right>", ":tabnext<CR>", "Move to right tab")
 
-map("n", "<C-s>", ":Telescope live_grep<CR>", "search through all files")
-map("n", "<C-f>", ":Telescope find_files<CR>", "search for files")
+map("n", "<C-s>", ":Telescope live_grep<CR>", "Live grep")
+map("n", "<C-f>", ":Telescope find_files<CR>", "Search for files")
 
 map("v", "<", "<gv")
 map("v", ">", ">gv")
@@ -50,7 +49,7 @@ map("v", ">", ">gv")
 map("n", "<C-S-Left>", "^", "Go to beginning of line")
 map("n", "<C-S-Right>", "$", "Go to end of line")
 
-map("n", "<S-Left>", "B", "prev word")
-map("n", "<S-Right>", "W", "next word")
+map("n", "<S-Left>", "B", "Previous word")
+map("n", "<S-Right>", "W", "Next word")
 
 map({ "n", "v" }, "<C-a>", "<cmd>NeoTreeRevealToggle<cr>", "Toggle file explorer")

@@ -29,6 +29,7 @@ return {
         "neovim/nvim-lspconfig",
         lazy = false,
         config = function()
+            local capabilities = require('cmp_nvim_lsp').default_capabilities()
             local lspconfig = require("lspconfig")
             lspconfig.lua_ls.setup({
                 settings = {
@@ -38,9 +39,14 @@ return {
                         },
                     },
                 },
+                capabilities = capabilities
             })
-            lspconfig.clangd.setup({})
-            lspconfig.pyright.setup({})
+            lspconfig.clangd.setup({
+                capabilities = capabilities
+            })
+            lspconfig.pyright.setup({
+                capabilities = capabilities
+            })
         end,
     },
 }

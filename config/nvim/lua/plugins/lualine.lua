@@ -32,10 +32,10 @@ return {
 					},
 				},
 				lualine_x = {
-					{
+					--[[ {
 						"datetime",
 						style = "%m/%d/%Y %H:%M",
-					},
+					}, --]]
 					"fileformat",
 					{
 						"filetype",
