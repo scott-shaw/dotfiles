@@ -16,3 +16,5 @@ playerctl
 ripgrep
 guvcview
 firefox
+npm
+gnome-browser-connector
