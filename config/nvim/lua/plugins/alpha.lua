@@ -48,6 +48,7 @@ return {
             dashboard.button("s", " " .. " Search for text", ":Telescope live_grep <CR>"),
             dashboard.button("r", " " .. " Recent files", ":Telescope oldfiles <CR>"),
             dashboard.button("n", " " .. " New file", ":ene <BAR> startinsert <CR>"),
+            dashboard.button("<leader>ww", " " .. " Notes"),
             dashboard.button("c", " " .. " Config", ":e $MYVIMRC <CR>"),
             dashboard.button("l", "⏾ " .. " Lazy", ":Lazy<CR>"),
             dashboard.button("q", " " .. " Quit", ":qa<CR>"),

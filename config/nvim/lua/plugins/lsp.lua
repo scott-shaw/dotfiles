@@ -9,6 +9,8 @@ return {
 					"ruff",
 					"black",
 					"stylua",
+                    "shellcheck",
+                    "shfmt",
 				},
 			})
 		end,
@@ -20,7 +22,9 @@ return {
 				ensure_install = {
 					"lua_ls",
 					"clangd",
-					"pyright",
+                    "pylsp",
+                    --"jedi_language_server",
+                    "bashls",
 				},
 			})
 		end,
@@ -44,21 +48,28 @@ return {
 			lspconfig.clangd.setup({
 				capabilities = capabilities,
 			})
-			lspconfig.pyright.setup({
+			lspconfig.pylsp.setup({
 				capabilities = capabilities,
-				settings = {
-					python = {
-						analysis = {
-                            diagnosticMode = "off",
-                            typeCheckingMode = "off",
-                            extraPaths = {
-                                "~/bdai/",
-                                "~/bdai/src/bdai/perception/"
+                settings = {
+                    pylsp = {
+                        plugins = {
+                            pycodestyle = {
+                                maxLineLength = 120,
+                            },
+                            flake8 = {
+                                enabled = true,
+                                maxLineLength = 120,
                             }
-                        },
-					},
-				},
-			})
+                        }
+                    }
+                }
+            })
+            --lspconfig.jedi_language_server.setup({
+            --    capabilities = capabilities,
+            --})
+            lspconfig.bashls.setup({
+                capabilities = capabilities,
+            })
 		end,
 	},
 }

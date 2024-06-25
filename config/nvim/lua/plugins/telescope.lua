@@ -5,5 +5,16 @@ return {
         dependencies = {
             "nvim-lua/plenary.nvim",
         },
+        config = function()
+            require("telescope").setup({
+                defaults = {
+                    path_display = { "smart" },
+                    layout_config = {
+                        horizontal = { width = 0.95 },
+                        preview_cutoff = 10,
+                    },
+                },
+            })
+        end,
     },
 }
