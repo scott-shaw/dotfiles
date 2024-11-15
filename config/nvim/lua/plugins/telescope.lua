@@ -4,6 +4,7 @@ return {
         branch = "0.1.x",
         dependencies = {
             "nvim-lua/plenary.nvim",
+            "nvim-telescope/telescope-live-grep-args.nvim",
         },
         config = function()
             require("telescope").setup({
