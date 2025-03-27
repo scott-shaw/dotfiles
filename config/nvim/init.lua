@@ -1,7 +1,7 @@
 -- ==================================================================
 -- | NEOVIM CONFIG                                                  |
 -- | Scott Shaw                                                     |
--- | Jun 25 2024                                                    |
+-- | Mar 27 2025                                                    |
 -- ==================================================================
 
 require("utils.lazy")
@@ -75,7 +75,6 @@ require("utils.lazy")
 -- :Glow (preview markdown)
 
 -- +++++++++++++++++++++++++ Vim Settings +++++++++++++++++++++++++
--- vim.o.mouse = ""
 vim.o.number = true
 vim.o.relativenumber = true
 vim.o.ttyfast = true
@@ -98,28 +97,17 @@ vim.bo.undofile = true
 -- sidebar error symbols
 vim.diagnostic.config({
     signs = {
-        text = { [vim.diagnostic.severity.ERROR] = " ", " " },
-    }
-})
-vim.diagnostic.config({
-    signs = {
-        text = { [vim.diagnostic.severity.WARN] = " ", " " },
-    }
-})
-vim.diagnostic.config({
-    signs = {
-        text = { [vim.diagnostic.severity.INFO] = " ", " " },
-    }
-})
-vim.diagnostic.config({
-    signs = {
-        text = { [vim.diagnostic.severity.HINT] = "", "" },
+        text = {
+            [vim.diagnostic.severity.ERROR] = " ",
+            [vim.diagnostic.severity.WARN] = " ",
+            [vim.diagnostic.severity.INFO] = " ",
+            [vim.diagnostic.severity.HINT] = "",
+        }
     }
 })
 
 -- set color scheme
 vim.cmd.colorscheme "catppuccin"
---vim.api.nvim_set_hl(0, "FlashLabel", {bg = "#E83E91"})
 
 -- +++++++++++++++++++++++++ Set Keybindings +++++++++++++++++++++++++
 local map = require("utils.keys").map
@@ -136,8 +124,8 @@ map("n", "<C-f>", ":Telescope find_files<CR>", "Search for files")
 map("n", "<C-d>", ":Telescope oldfiles<CR>", "Look through recent files")
 map("n", "<C-s>", ":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>")
 
-map("n", "<C-S-s>", "<cmd>Telescope dir live_grep<CR>")
-map("n", "<C-S-f>", "<cmd>Telescope dir find_files<CR>", "Search for files")
+map("n", "<C-S-s>", "<cmd>Telescope live_grep<CR>")
+map("n", "<C-S-f>", "<cmd>Telescope find_files<CR>", "Search for files")
 
 -- indentation
 map("v", "<", "<gv")

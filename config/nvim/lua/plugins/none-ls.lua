@@ -12,8 +12,6 @@ return {
                     extra_args = { "--ignore-missing-imports" }
                 }),
                 null_ls.builtins.formatting.shfmt,
-                -- null_ls.builtins.diagnostics.clang_check,
-                -- null_ls.builtins.formatting.clang_format,
             },
         })
         vim.keymap.set("n", "<C-l>", vim.lsp.buf.format, {})

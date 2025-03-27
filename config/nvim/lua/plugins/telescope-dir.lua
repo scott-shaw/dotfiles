@@ -6,7 +6,7 @@ return {
 		require("dir-telescope").setup({
 			-- these are the default options set
 			hidden = true,
-			no_ignore = false,
+			no_ignore = true,
 			show_preview = true,
 			follow_symlinks = false,
 		})

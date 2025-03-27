@@ -51,9 +51,6 @@ return {
                 cmd = {
                     "clangd",
                     '--query-driver=/usr/bin/c++',
-                    -- "--background-index",
-                    -- "--suggest-missing-includes",
-                    -- "--compile-commands-dir=/home/sshaw/bdai",
                 },
                 filetypes = { "c", "cpp", "objc", "objcpp" },
             })
@@ -62,22 +59,23 @@ return {
                 settings = {
                     pylsp = {
                         plugins = {
-                            -- linter options
+                            black = {
+                                enabled = false,
+                            },
+                            ruff = {
+                                enabled = true,
+                            },
                             pylint = {
                                 enabled = false,
-                                executable = "pylint",
-                                maxLineLength = 120,
                             },
                             pycodestyle = {
-                                enabled = true,
-                                maxLineLength = 120,
+                                enabled = false,
                             },
                             flake8 = {
-                                enabled = true,
-                                maxLineLength = 120,
+                                enabled = false,
                             },
                             -- type checker
-                            pylsp_mypy = { enabled = false },
+                            pylsp_mypy = { enabled = false},
                             -- auto-completion options
                             jedi_completion = { fuzzy = true },
                             -- import sorting
@@ -85,54 +83,10 @@ return {
                         },
                     },
                 },
+                flags = {
+                    debounce_text_changes = 250,
+                },
             })
-            -- lspconfig.jedi_language_server.setup({
-            --     capabilities = capabilities,
-            -- })
-            -- lspconfig.pyright.setup({
-            --     capabilities = capabilities,
-            --     -- root_dir = vim.loop.cwd(),
-            --     -- root_files = {
-            --     --     "pyproject.toml",
-            --     --     "setup.py",
-            --     --     "setup.cfg",
-            --     --     "requirements.txt",
-            --     --     "Pipfile",
-            --     --     "pyrightconfig.json",
-            --     -- },
-            --     settings = {
-            --         python = {
-            --             analysis = {
-            --                 autoSearchPaths = true,
-            --                 diagnosticMode = "openFilesOnly",
-            --                 useLibraryCodeForTypes = true,
-            --                 enableReachabilityAnalysis = false,
-            --                 strictParameterNoneValue = false,
-            --                 reportMissingImports = "warning",
-            --                 reportUnusedVariable = "information",
-            --                 -- reportDuplicateImport = "information",
-            --                 extraPaths = {
-            --                     "~/bdai/projects/watch_understand_do/ws/src/wud_ros/wud_ros/",
-            --                     "~/bdai/projects/watch_understand_do/ws/src/wud_ros/",
-            --                     "~/bdai/projects/watch_understand_do/ws/src/wud_msgs/srv/",
-            --                     "~/bdai/projects/watch_understand_do/ws/src/wud_msgs/",
-            --                     "~/bdai/projects/watch_understand_do/**",
-            --                     "~/bdai/ws/src/external/ros_utilities/bdai_ros2_wrappers/",
-            --                     "~/bdai/ws/src/external/ros_utilities/",
-            --                     "~/bdai/ws/src/external/ros_utilities/**",
-            --                     "~/bdai/ws/src/external/",
-            --                     "~/bdai/ws/src/spot_utilities/spot_utilities/",
-            --                     "~/bdai/ws/src/spot_utilities/",
-            --                     "~/bdai/ws/src/spot_utilities_msgs/",
-            --                     "~/bdai/ws/src/bdai_ros/bdai_ros/",
-            --                     "~/bdai/ws/src/bdai_ros/",
-            --                     "~/bdai/ws/src/lat_msgs/",
-            --                     "~/bdai/ws/src/**",
-            --                 },
-            --             },
-            --         },
-            --     },
-            -- })
             lspconfig.bashls.setup({
                 capabilities = capabilities,
             })
