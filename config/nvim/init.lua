@@ -75,6 +75,7 @@ require("utils.lazy")
 -- :Glow (preview markdown)
 
 -- +++++++++++++++++++++++++ Vim Settings +++++++++++++++++++++++++
+vim.o.mouse="a"
 vim.o.number = true
 vim.o.relativenumber = true
 vim.o.ttyfast = true
@@ -117,6 +118,8 @@ map("i", "jk", "<esc>")
 map("n", "<leader>v", "viw")
 map("n", "<leader>y", "yiw")
 map("n", "<leader>r", ":%s/<C-R><C-W>/")
+-- reload file
+map("n", "<leader>e", ":edit!<CR>")
 
 -- search
 -- map("n", "<C-s>", ":Telescope live_grep<CR>", "Live grep")
