@@ -70,7 +70,7 @@ return {
 							-- linter options
 							pylint = { enabled = false, executable = "pylint" },
 							pyflakes = { enabled = false },
-							pycodestyle = { enabled = false, maxLineLength=120, ignore = {'E501'} },
+							pycodestyle = { enabled = true, maxLineLength=120, ignore={"E266"} },
 							ruff = { enabled = true },
 							-- type checker
 							pylsp_mypy = { enabled = false, live_mode = false, dmypy = true, report_progress = false },
