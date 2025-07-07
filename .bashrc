@@ -127,4 +127,7 @@ if ! shopt -oq posix; then
   fi
 fi
 
+alias gext=gnome-extensions-cli
+alias mux=tmuxinator
+
 ~/pfetch.sh

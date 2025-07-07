@@ -1,8 +1,7 @@
 git
 vim
-neovim
-rofi
 tmux
+tmuxinator
 wget
 gnome-tweaks
 guvcview
@@ -21,3 +20,5 @@ dbus-x11
 ripgrep
 black
 mypy
+python3-pip
+python-is-python3

@@ -5,7 +5,6 @@ sudo apt update && sudo apt upgrade -y
 sudo add-apt-repository -y ppa:papirus/papirus
 sudo add-apt-repository -y multiverse
 sudo add-apt-repository -y universe
-sudo add-apt-repository -y ppa:neovim-ppa/unstable
 
 # apt
 sudo apt install -y $(cat apt_list.txt)
@@ -17,14 +16,30 @@ rm ./google-chrome-stable_current_amd64.deb
 
 # snaps
 sudo snap install alacritty --edge --classic
-sudo snap install spotify 
-sudo snap install whatsapp-for-linux
-sudo snap install discord
+sudo snap install nvim --classic
 
 # remove dock
 sudo apt remove -y gnome-shell-extension-ubuntu-dock
 
-wget -O gnome-shell-extension-installer https://github.com/brunelli/gnome-shell-extension-installer/raw/master/gnome-shell-extension-installer
-chmod +x gnome-shell-extension-installer
-sudo mv gnome-shell-extension-installer /usr/bin/
+# Extension installer
+pip3 install --upgrade gnome-extensions-cli
+
+# Awesome tiles
+gnome-extensions-cli install 4702
+# Disable workspace switch animation
+gnome-extensions-cli install 4290
+# Resource monitor
+gnome-extensions-cli install 1634
+# Sound percentage
+gnome-extensions-cli install 2120
+# Space bar
+gnome-extensions-cli install 5090
+# Todo
+gnome-extensions-cli install 570
+# Top bar organizer
+gnome-extensions-cli install 4356
+# Unite
+gnome-extensions-cli install 1287
+# User themes
+gnome-extensions-cli install 19
 

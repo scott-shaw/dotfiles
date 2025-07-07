@@ -91,6 +91,7 @@ vim.o.wrap = true
 vim.o.linebreak = true
 vim.o.termguicolors = true
 vim.o.signcolumn = "yes"
+vim.treesitter.language.register('markdown', 'vimwiki')
 
 -- persistent undos
 vim.bo.undofile = true
