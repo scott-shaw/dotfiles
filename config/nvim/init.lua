@@ -169,3 +169,5 @@ map("n", "<leader>w", "<leader>wt", "open wiki in new tab")
 -- jump to definition
 map('n', 'gd', '<cmd>tab split | lua vim.lsp.buf.definition()<CR>')
 map('n', 'gt', '<cmd>tab split | lua vim.lsp.buf.type_definition()<CR>')
+
+map('n', '<leader>r', require('markdown-togglecheck').toggle, "Toggle checkmark")

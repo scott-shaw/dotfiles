@@ -18,6 +18,9 @@ rm ./google-chrome-stable_current_amd64.deb
 sudo snap install alacritty --edge --classic
 sudo snap install nvim --classic
 
+npm install -g tree-sitter-cli
+pip install pylatexenc
+
 # remove dock
 sudo apt remove -y gnome-shell-extension-ubuntu-dock
 

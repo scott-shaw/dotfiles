@@ -22,3 +22,5 @@ black
 mypy
 python3-pip
 python-is-python3
+nodejs
+npm

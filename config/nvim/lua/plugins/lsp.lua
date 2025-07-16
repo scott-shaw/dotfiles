@@ -30,9 +30,10 @@ return {
 	},
 	{
 		"neovim/nvim-lspconfig",
+		dependencies = { 'saghen/blink.cmp' },
 		lazy = false,
 		config = function()
-			local capabilities = require("cmp_nvim_lsp").default_capabilities()
+			local capabilities = require('blink.cmp').get_lsp_capabilities()
 			local lspconfig = require("lspconfig")
 			lspconfig.lua_ls.setup({
 				capabilities = capabilities,
@@ -70,7 +71,7 @@ return {
 							-- linter options
 							pylint = { enabled = false, executable = "pylint" },
 							pyflakes = { enabled = false },
-							pycodestyle = { enabled = true, maxLineLength=120, ignore={"E266"} },
+							pycodestyle = { enabled = true, maxLineLength=120, ignore={"E266", "W503"} },
 							ruff = { enabled = true },
 							-- type checker
 							pylsp_mypy = { enabled = false, live_mode = false, dmypy = true, report_progress = false },

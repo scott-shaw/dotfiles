@@ -1,12 +1,12 @@
 return {
-    'MeanderingProgrammer/markdown.nvim',
+    "MeanderingProgrammer/markdown.nvim",
     main = "render-markdown",
     opts = {},
-    name = 'render-markdown', -- Only needed if you have another plugin named markdown.nvim
-    dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.icons' }, -- if you use standalone mini plugins
-	config = function()
-		require('render-markdown').setup({
-            file_types = { 'markdown', 'vimwiki' },
+    name = "render-markdown",                                                    -- Only needed if you have another plugin named markdown.nvim
+    dependencies = { "nvim-treesitter/nvim-treesitter", "echasnovski/mini.icons" }, -- if you use standalone mini plugins
+    config = function()
+        require("render-markdown").setup({
+            file_types = { "markdown", "vimwiki" },
             heading = {
                 -- Turn on / off heading icon & background rendering
                 enabled = true,
@@ -16,29 +16,29 @@ return {
                 -- The number of '#' in the heading determines the 'level'
                 -- The 'level' is used to index into the array using a cycle
                 -- The result is left padded with spaces to hide any additional '#'
-                icons = { '󰉫 ', '󰉬 ', '󰉭 ', '󰉮 ', '󰉯 ', '󰉰 ' },
+                icons = { "󰉫 ", "󰉬 ", "󰉭 ", "󰉮 ", "󰉯 ", "󰉰 " },
                 -- Added to the sign column if enabled
                 -- The 'level' is used to index into the array using a cycle
-                signs = { '󰉴 ' },
+                signs = { "󰉴 " },
                 -- The 'level' is used to index into the array using a clamp
                 -- Highlight for the heading icon and extends through the entire line
                 backgrounds = {
-                    'RenderMarkdownH1Bg',
-                    'RenderMarkdownH2Bg',
-                    'RenderMarkdownH3Bg',
-                    'RenderMarkdownH4Bg',
-                    'RenderMarkdownH5Bg',
-                    'RenderMarkdownH6Bg',
+                    "RenderMarkdownH1Bg",
+                    "RenderMarkdownH2Bg",
+                    "RenderMarkdownH3Bg",
+                    "RenderMarkdownH4Bg",
+                    "RenderMarkdownH5Bg",
+                    "RenderMarkdownH6Bg",
                 },
                 -- The 'level' is used to index into the array using a clamp
                 -- Highlight for the heading and sign icons
                 foregrounds = {
-                    'RenderMarkdownH1',
-                    'RenderMarkdownH2',
-                    'RenderMarkdownH3',
-                    'RenderMarkdownH4',
-                    'RenderMarkdownH5',
-                    'RenderMarkdownH6',
+                    "RenderMarkdownH1",
+                    "RenderMarkdownH2",
+                    "RenderMarkdownH3",
+                    "RenderMarkdownH4",
+                    "RenderMarkdownH5",
+                    "RenderMarkdownH6",
                 },
             },
 
@@ -52,19 +52,19 @@ return {
                 --  normal: adds highlight group to code blocks & inline code, adds padding to code blocks
                 --  language: adds language icon to sign column if enabled and icon + name above code blocks
                 --  full: normal + language
-                style = 'full',
+                style = "full",
                 -- Amount of padding to add to the left of code blocks
                 left_pad = 4,
                 -- Determins how the top / bottom of code block are rendered:
                 --  thick: use the same highlight as the code body
                 --  thin: when lines are empty overlay the above & below icons
-                border = 'thick',
+                border = "thick",
                 -- Used above code blocks for thin border
-                above = '▄',
+                above = "▄",
                 -- Used below code blocks for thin border
-                below = '▀',
+                below = "▀",
                 -- Highlight for code blocks & inline code
-                highlight = 'RenderMarkdownCode',
+                highlight = "RenderMarkdownCode",
             },
 
             checkbox = {
@@ -72,15 +72,15 @@ return {
                 enabled = true,
                 unchecked = {
                     -- Replaces '[ ]' of 'task_list_marker_unchecked'
-                    icon = '󰄱 ',
+                    icon = "󰄱 ",
                     -- Highlight for the unchecked icon
-                    highlight = 'RenderMarkdownUnchecked',
+                    highlight = "RenderMarkdownUnchecked",
                 },
                 checked = {
                     -- Replaces '[x]' of 'task_list_marker_checked'
-                    icon = '󰱒 ',
+                    icon = "󰱒 ",
                     -- Highligh for the checked icon
-                    highlight = 'RenderMarkdownChecked',
+                    highlight = "RenderMarkdownChecked",
                 },
                 -- Define custom checkbox states, more involved as they are not part of the markdown grammar
                 -- As a result this requires neovim >= 0.10.0 since it relies on 'inline' extmarks
@@ -90,7 +90,7 @@ return {
                 --   'rendered': Replaces the 'raw' value when rendering
                 --   'highlight': Highlight for the 'rendered' icon
                 custom = {
-                    todo = { raw = '[-]', rendered = '󰥔 ', highlight = 'RenderMarkdownTodo' },
+                    todo = { raw = "[-]", rendered = "󰥔 ", highlight = "RenderMarkdownTodo" },
                 },
             },
 
@@ -101,29 +101,29 @@ return {
                 -- How deeply nested the list is determines the 'level'
                 -- The 'level' is used to index into the array using a cycle
                 -- If the item is a 'checkbox' a conceal is used to hide the bullet instead
-                icons = { '●', '○', '◆', '◇' },
+                icons = { "●", "○", "◆", "◇" },
                 -- Highlight for the bullet icon
-                highlight = 'RenderMarkdownBullet',
+                highlight = "RenderMarkdownBullet",
             },
 
             link = {
                 -- Turn on / off inline link icon rendering
                 enabled = true,
                 -- Inlined with 'image' elements
-                image = '󰥶 ',
+                image = "󰥶 ",
                 -- Inlined with 'inline_link' elements
-                hyperlink = '󰌹 ',
+                hyperlink = "󰌹 ",
                 -- Applies to the inlined icon
-                highlight = 'RenderMarkdownLink',
+                highlight = "RenderMarkdownLink",
             },
 
             quote = {
                 -- Turn on / off block quote & callout rendering
                 enabled = true,
                 -- Replaces '>' of 'block_quote'
-                icon = '▋',
+                icon = "▋",
                 -- Highlight for the quote icon
-                highlight = 'RenderMarkdownQuote',
+                highlight = "RenderMarkdownQuote",
             },
 
             dash = {
@@ -131,10 +131,15 @@ return {
                 enabled = true,
                 -- Replaces '---'|'***'|'___'|'* * *' of 'thematic_break'
                 -- The icon gets repeated across the window's width
-                icon = '─',
+                icon = "─",
                 -- Highlight for the whole line generated from the icon
-                highlight = 'RenderMarkdownDash',
+                highlight = "RenderMarkdownDash",
             },
         })
     end,
+    {
+        "nfrid/markdown-togglecheck",
+        dependencies = { "nfrid/treesitter-utils" },
+        ft = { "markdown" },
+    },
 }

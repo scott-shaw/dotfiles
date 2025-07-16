@@ -27,7 +27,7 @@ return {
 			},
 		})
 		vim.notify = require("mini.notify").make_notify({
-			ERROR = { duration = 2000, hl_group = "DiagnosticError" },
+			ERROR = { duration = 10000, hl_group = "DiagnosticError" },
 			WARN = { duration = 2000, hl_group = "DiagnosticWarn" },
 			INFO = { duration = 2000, hl_group = "DiagnosticInfo" },
 			DEBUG = { duration = 1000, hl_group = "DiagnosticHint" },
