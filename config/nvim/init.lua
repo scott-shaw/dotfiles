@@ -130,7 +130,6 @@ map("n", "<C-s>", ":lua require('telescope').extensions.live_grep_args.live_grep
 
 map("n", "<C-S-s>", "<cmd>Telescope live_grep<CR>")
 map("n", "<C-S-f>", "<cmd>Telescope find_files<CR>", "Search for files")
-
 -- indentation
 map("v", "<", "<gv")
 map("v", ">", ">gv")
@@ -171,3 +170,8 @@ map('n', 'gd', '<cmd>tab split | lua vim.lsp.buf.definition()<CR>')
 map('n', 'gt', '<cmd>tab split | lua vim.lsp.buf.type_definition()<CR>')
 
 map('n', '<leader>r', require('markdown-togglecheck').toggle, "Toggle checkmark")
+
+-- Copilot
+map("n", "<leader>c", ":CopilotChatToggle<CR>", "Open/close copilot chat window.")
+map("n", "<leader>C", ":CopilotChatReset<CR>", "Reset copilot chat window.")
+

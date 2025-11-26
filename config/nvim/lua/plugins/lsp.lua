@@ -3,16 +3,7 @@ return {
 		"williamboman/mason.nvim",
 		lazy = false,
 		config = function()
-			require("mason").setup({
-				ensure_install = {
-					"mypy",
-					"ruff",
-					"black",
-					"stylua",
-					"shellcheck",
-					"shfmt",
-				},
-			})
+			require("mason").setup()
 		end,
 	},
 	{
@@ -20,10 +11,18 @@ return {
 		config = function()
 			require("mason-lspconfig").setup({
 				ensure_install = {
-					"lua_ls",
-					"clangd",
-					"pylsp",
 					"bashls",
+					"black",
+					"clangd",
+					"lemminx",
+					"lua_ls",
+					"marksman",
+					"mypy",
+					"pylsp",
+					"ruff",
+					"shellcheck",
+					"shfmt",
+					"stylua",
 				},
 			})
 		end,
@@ -33,10 +32,8 @@ return {
 		dependencies = { 'saghen/blink.cmp' },
 		lazy = false,
 		config = function()
-			local capabilities = require('blink.cmp').get_lsp_capabilities()
-			local lspconfig = require("lspconfig")
-			lspconfig.lua_ls.setup({
-				capabilities = capabilities,
+			-- Lua
+			vim.lsp.config("lua_ls", {
 				settings = {
 					Lua = {
 						diagnostics = {
@@ -45,8 +42,10 @@ return {
 					},
 				},
 			})
-			lspconfig.clangd.setup({
-				capabilities = capabilities,
+			vim.lsp.enable({ "lua_ls" })
+
+			-- C++
+			vim.lsp.config("clangd", {
 				cmd = {
 					"clangd",
 					"--background-index",
@@ -59,8 +58,10 @@ return {
 				filetypes = { "c", "cpp", "objc", "objcpp" },
 				init_option = { fallbackFlags = { '-std=c++20' } },
 			})
-			lspconfig.pylsp.setup({
-				capabilities = capabilities,
+			vim.lsp.enable({ "clangd" })
+
+			-- Python
+			vim.lsp.config("pylsp", {
 				settings = {
 					pylsp = {
 						plugins = {
@@ -86,9 +87,11 @@ return {
 					debounce_text_changes = 250,
 				},
 			})
-			lspconfig.bashls.setup({
-				capabilities = capabilities,
-			})
+			vim.lsp.enable({ "pylsp" })
+
+			-- Bash
+			vim.lsp.config("bashls", {})
+			vim.lsp.enable({ "bashls" })
 		end,
 	},
 }

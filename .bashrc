@@ -127,6 +127,8 @@ if ! shopt -oq posix; then
   fi
 fi
 
+export EDITOR=nvim
+export GIT_EDITOR=nvim
 alias gext=gnome-extensions-cli
 alias mux=tmuxinator
 

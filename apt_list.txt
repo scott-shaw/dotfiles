@@ -24,3 +24,6 @@ python3-pip
 python-is-python3
 nodejs
 npm
+gawk
+net-tools
+coreutils

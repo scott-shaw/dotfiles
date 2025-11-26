@@ -1,11 +1,10 @@
 return {
 	"saghen/blink.cmp",
-	lazy = false, -- lazy loading handled internally
 	-- optional: provides snippets for the snippet source
-	dependencies = "rafamadriz/friendly-snippets",
+	dependencies = { "rafamadriz/friendly-snippets", "fang2hou/blink-copilot" },
 
 	-- use a release tag to download pre-built binaries
-	version = "v0.*",
+	version = "*",
 	-- OR build from source, requires nightly: https://rust-lang.github.io/rustup/concepts/channels.html#working-with-nightly-rust
 	-- build = 'cargo build --release',
 	-- If you use nix, you can build from source using latest nightly rust with:
@@ -43,13 +42,24 @@ return {
 		-- default list of enabled providers defined so that you can extend it
 		-- elsewhere in your config, without redefining it, via `opts_extend`
 		sources = {
-			default = { "lsp", "path", "snippets", "buffer" },
+			default = { "lsp", "path", "snippets", "buffer", "copilot" },
 			-- optionally disable cmdline completions
 			-- cmdline = {},
+			providers = {
+				copilot = {
+					name = "copilot",
+					module = "blink-copilot",
+					score_offset = 100,
+					async = true,
+				},
+			},
 		},
 
 		-- experimental signature help support
 		signature = { enabled = true },
+
+		-- (Default) Rust fuzzy matcher for typo resistance and significantly better performance
+		fuzzy = { implementation = "prefer_rust_with_warning" },
 	},
 	-- allows extending the providers array elsewhere in your config
 	-- without having to redefine it
