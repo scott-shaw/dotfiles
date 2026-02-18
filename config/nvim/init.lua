@@ -91,6 +91,8 @@ vim.o.wrap = true
 vim.o.linebreak = true
 vim.o.termguicolors = true
 vim.o.signcolumn = "yes"
+vim.o.cmdheight = 0
+vim.o.smartcase = true
 vim.treesitter.language.register('markdown', 'vimwiki')
 
 -- persistent undos
@@ -118,7 +120,7 @@ map("i", "jk", "<esc>")
 -- select, yank, replace
 map("n", "<leader>v", "viw")
 map("n", "<leader>y", "yiw")
-map("n", "<leader>r", ":%s/<C-R><C-W>/")
+map("n", "<leader>r", ":%s/<C-r><C-w>//gc<Left><Left><Left>", "Replace word under cursor")
 -- reload file
 map("n", "<leader>e", ":edit!<CR>")
 
@@ -169,7 +171,9 @@ map("n", "<leader>w", "<leader>wt", "open wiki in new tab")
 map('n', 'gd', '<cmd>tab split | lua vim.lsp.buf.definition()<CR>')
 map('n', 'gt', '<cmd>tab split | lua vim.lsp.buf.type_definition()<CR>')
 
-map('n', '<leader>r', require('markdown-togglecheck').toggle, "Toggle checkmark")
+-- Markdown
+map('n', '<leader>f', require('markdown-togglecheck').toggle, "Toggle checkmark")
+map('n', '<leader>x', function() vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('viwgsb', true, false, true), 'm', false) end, "Toggle bold on current word")
 
 -- Copilot
 map("n", "<leader>c", ":CopilotChatToggle<CR>", "Open/close copilot chat window.")

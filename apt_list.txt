@@ -27,3 +27,4 @@ npm
 gawk
 net-tools
 coreutils
+entr
