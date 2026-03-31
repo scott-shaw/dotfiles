@@ -15,8 +15,29 @@ sudo apt install -y ./google-chrome-stable_current_amd64.deb
 rm ./google-chrome-stable_current_amd64.deb
 
 # snaps
-sudo snap install alacritty --edge --classic
 sudo snap install nvim --classic
+
+# kitty
+curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
+ln -s ~/.local/kitty.app/bin/kitty ~/.local/bin/
+ln -s ~/.local/kitty.app/bin/kitten ~/.local/bin/kitten
+
+# homebrew
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+test -d ~/.linuxbrew && eval "$(~/.linuxbrew/bin/brew shellenv)"
+test -d /home/linuxbrew/.linuxbrew && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+echo "eval \"\$($(brew --prefix)/bin/brew shellenv)\"" >> ~/.bashrc
+brew install tmux
+brew install CodeOne45/tap/vex
+brew install fx
+
+# diff so fancy
+curl -L -o /usr/local/bin/diff-so-fancy https://github.com/so-fancy/diff-so-fancy/releases/download/v1.4.8/diff-so-fancy
+git config --global core.pager "diff-so-fancy | less --tabs=4 -RF"
+git config --global interactive.diffFilter "diff-so-fancy --patch"
+
+curl -L -O https://github.com/lsd-rs/lsd/releases/download/v1.2.0/lsd-musl_1.2.0_amd64.deb
+sudo apt install -y ./lsd-musl_1.2.0_amd64.deb
 
 npm install -g tree-sitter-cli
 pip install pylatexenc

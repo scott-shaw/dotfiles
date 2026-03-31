@@ -28,3 +28,4 @@ gawk
 net-tools
 coreutils
 entr
+bat

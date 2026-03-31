@@ -12,14 +12,14 @@ return {
 				lualine_b = {
 					"branch",
 					{
-						'diff',
+						"diff",
 						colored = true,
 						diff_color = {
-							added    = 'LuaLineDiffAdd',
-							modified = 'LuaLineDiffChange',
-							removed  = 'LuaLineDiffDelete',
+							added = "LuaLineDiffAdd",
+							modified = "LuaLineDiffChange",
+							removed = "LuaLineDiffDelete",
 						},
-						symbols = { added = '+', modified = '~', removed = '-' },
+						symbols = { added = "+", modified = "~", removed = "-" },
 						source = nil,
 					},
 					{
@@ -30,12 +30,15 @@ return {
 						update_in_insert = true,
 						always_visible = false,
 					},
+					{
+						cond = require("tmux-status").show,
+					},
 				},
 				lualine_x = {
-					--[[ {
-						"datetime",
-						style = "%m/%d/%Y %H:%M",
-					}, --]]
+					-- {
+					-- 	"datetime",
+					-- 	style = "%m/%d/%Y %H:%M",
+					-- },
 					"fileformat",
 					{
 						"filetype",

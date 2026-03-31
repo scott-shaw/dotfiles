@@ -10,7 +10,8 @@ return {
         config = function()
             require("neo-tree").setup({
                 close_if_last_window = true,
-                popup_border_style = "rounded",
+                -- Options: "single", "double", "rounded", "solid", "NC"
+                popup_border_style = "solid",
                 window = {
                     position = "float",
                     width = 24,

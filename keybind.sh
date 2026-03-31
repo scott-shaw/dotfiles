@@ -10,8 +10,8 @@ gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings \
 "['$KEY_PATH/custom0/', '$KEY_PATH/custom1/', '$KEY_PATH/custom2/', '$KEY_PATH/custom3/', '$KEY_PATH/custom4/', '$KEY_PATH/custom5/', '$KEY_PATH/custom6/']"
 
 # Launch Alacritty
-$BEGINNING/custom0/ name "alacritty"
-$BEGINNING/custom0/ command "alacritty"
+$BEGINNING/custom0/ name "kitty"
+$BEGINNING/custom0/ command "kitty"
 $BEGINNING/custom0/ binding "<Alt>X"
 
 # Launch Rofi

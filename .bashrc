@@ -48,8 +48,9 @@ fi
 
 # set a fancy prompt (non-color, unless we know we "want" color)
 case "$TERM" in
-    xterm-color|*-256color) color_prompt=yes;;
+xterm-color | *-256color | xterm-kitty) color_prompt=yes ;;
 esac
+
 
 # uncomment for a colored prompt, if the terminal has the capability; turned
 # off by default to not distract the user: the focus in a terminal window
@@ -127,9 +128,131 @@ if ! shopt -oq posix; then
   fi
 fi
 
+montage_tile() {
+	local w="$1"
+	local h="$2"
+	shift 2
+
+	local border=5
+	local bordercolor="black"
+	local extra_args=()
+
+	while [[ "$1" == --* ]]; do
+		case "$1" in
+		--border)
+			border="$2"
+			shift 2
+			;;
+		--bordercolor)
+			bordercolor="$2"
+			shift 2
+			;;
+		--*)
+			extra_args+=("-${1#--}" "$2")
+			shift 2
+			;;
+		esac
+	done
+
+	local output="${@: -1}"
+	local inputs=("${@:1:$#-1}")
+
+	montage -tile "${w}x${h}" -geometry +0+0 "${inputs[@]}" \
+		-border "$border" -bordercolor "$bordercolor" \
+		"${extra_args[@]}" "$output"
+}
+
+icat_dir() {
+	DIR="${1:-.}"
+	COLS="${2:-}"
+
+	if [[ ! -d "$DIR" ]]; then
+		echo "Error: '$DIR' is not a directory" >&2
+		exit 1
+	fi
+
+	# Collect image files
+	mapfile -t IMAGES < <(find "$DIR" -maxdepth 1 -type f \
+		\( -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.png' \
+		   -o -iname '*.gif' -o -iname '*.webp' -o -iname '*.bmp' \
+		   -o -iname '*.tiff' -o -iname '*.tif' -o -iname '*.avif' \
+		   -o -iname '*.svg' \) | sort)
+
+	if [[ ${#IMAGES[@]} -eq 0 ]]; then
+		echo "No images found in '$DIR'" >&2
+		exit 1
+	fi
+
+	TERM_COLS=$(tput cols)
+	TERM_ROWS=$(tput lines)
+
+	# Auto-select column count: roughly sqrt(n), clamped to image count
+	if [[ -z "$COLS" ]]; then
+		COUNT=${#IMAGES[@]}
+		COLS=$(awk "BEGIN { c=int(sqrt($COUNT)); print (c<1)?1:c }")
+	fi
+
+	ROWS=$(( (${#IMAGES[@]} + COLS - 1) / COLS ))
+
+	# Terminal pixel dimensions
+	read -r PX_W PX_H < <(kitten icat --print-window-size | tr 'x' ' ')
+
+	# Single character cell size in pixels
+	read -r CHAR_PX_W CHAR_PX_H < <(awk "BEGIN { printf \"%d %d\", int($PX_W/$TERM_COLS), int($PX_H/$TERM_ROWS) }")
+
+	# Cell width in terminal columns and pixels (columns drive layout)
+	CELL_COLS=$(( TERM_COLS / COLS ))
+	CELL_PX_W=$(( CHAR_PX_W * CELL_COLS ))
+
+	# Derive cell height from the first image's aspect ratio so images fill their
+	# column width exactly — eliminating blank horizontal space between columns.
+	read -r IMG_W IMG_H < <(identify -format "%w %h\n" "${IMAGES[0]}" 2>/dev/null | head -1)
+	if [[ -z "$IMG_W" || "$IMG_W" -eq 0 ]]; then IMG_W=1; IMG_H=1; fi
+	CELL_PX_H=$(awk "BEGIN { printf \"%d\", int($CELL_PX_W * $IMG_H / $IMG_W) }")
+	CELL_ROWS=$(awk "BEGIN { r=int($CELL_PX_H / $CHAR_PX_H); printf \"%d\", (r<1)?1:r }")
+
+	clear
+
+	# Process one grid row at a time.  Printing blank lines row-by-row lets the
+	# terminal scroll in controlled increments; querying the real cursor position
+	# after each scroll gives the correct absolute Y for --place, avoiding the
+	# staircase that results from using pre-computed TOP values against an origin
+	# that shifts whenever the viewport scrolls.
+	for (( IROW=0; IROW < ROWS; IROW++ )); do
+		# Reserve vertical space for this image row and jump back to its top.
+		printf '\n%.0s' $(seq 1 "$CELL_ROWS")
+		tput cuu "$CELL_ROWS"
+
+		# Query actual cursor row (1-indexed) via ANSI DSR, convert to 0-indexed.
+		IFS='[;' read -sdR -p $'\033[6n' _ CURR_Y _ < /dev/tty
+		CURR_Y=$(( CURR_Y - 1 ))
+
+		for (( ICOL=0; ICOL < COLS; ICOL++ )); do
+			IDX=$(( IROW * COLS + ICOL ))
+			[[ $IDX -ge ${#IMAGES[@]} ]] && break
+			LEFT=$(( ICOL * CELL_COLS ))
+
+			convert "${IMAGES[$IDX]}" \
+				-resize "${CELL_PX_W}x${CELL_PX_H}" \
+				png:- \
+			| kitten icat \
+				--place "${CELL_COLS}x${CELL_ROWS}@${LEFT}x${CURR_Y}" \
+				--align left \
+				--scale-up \
+				--stdin=yes
+		done
+
+		# Advance cursor past this image row.
+		tput cud "$CELL_ROWS"
+	done
+}
+
 export EDITOR=nvim
 export GIT_EDITOR=nvim
 alias gext=gnome-extensions-cli
 alias mux=tmuxinator
+alias icat='kitten icat --align left'
+alias ls='lsd'
+alias cat="batcat --paging=never"
 
 ~/pfetch.sh
