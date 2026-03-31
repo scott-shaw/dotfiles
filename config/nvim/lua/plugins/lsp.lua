@@ -72,8 +72,8 @@ return {
 							-- linter options
 							pylint = { enabled = false, executable = "pylint" },
 							pyflakes = { enabled = false },
-							pycodestyle = { enabled = true, maxLineLength=120, ignore={"E266", "W503"} },
-							ruff = { enabled = true },
+							pycodestyle = { enabled = true, maxLineLength=120, ignore={"E266", "W503", "E203"} },
+							ruff = { enabled = true, extendSelect={"I"}, format={"I"} },
 							-- type checker
 							pylsp_mypy = { enabled = false, live_mode = false, dmypy = true, report_progress = false },
 							-- auto-completion options
