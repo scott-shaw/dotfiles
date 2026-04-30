@@ -1,7 +1,7 @@
 -- ==================================================================
 -- | NEOVIM CONFIG                                                  |
 -- | Scott Shaw                                                     |
--- | Mar 27 2025                                                    |
+-- | Apr 30 2026                                                    |
 -- ==================================================================
 
 require("utils.lazy")
@@ -72,7 +72,6 @@ require("utils.lazy")
 -- :Lazy (package manager)
 -- :Mason (manage language servers)
 -- :LspInfo (check lsp server info)
--- :Glow (preview markdown)
 
 -- +++++++++++++++++++++++++ Vim Settings +++++++++++++++++++++++++
 vim.o.mouse="a"
@@ -94,6 +93,10 @@ vim.o.signcolumn = "yes"
 vim.o.cmdheight = 0
 vim.o.smartcase = true
 vim.treesitter.language.register('markdown', 'vimwiki')
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = { '<filetype>' },
+  callback = function() vim.treesitter.start() end,
+})
 
 -- persistent undos
 vim.bo.undofile = true
@@ -121,17 +124,23 @@ map("i", "jk", "<esc>")
 map("n", "<leader>v", "viw")
 map("n", "<leader>y", "yiw")
 map("n", "<leader>r", ":%s/<C-r><C-w>//gc<Left><Left><Left>", "Replace word under cursor")
+
 -- reload file
 map("n", "<leader>e", ":edit!<CR>")
 
 -- search
--- map("n", "<C-s>", ":Telescope live_grep<CR>", "Live grep")
+map("n", "<C-s>", ":Telescope live_grep<CR>", "Live grep")
 map("n", "<C-f>", ":Telescope find_files<CR>", "Search for files")
 map("n", "<C-d>", ":Telescope oldfiles<CR>", "Look through recent files")
-map("n", "<C-s>", ":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>")
+-- map("n", "<C-s>", ":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>")
 
 map("n", "<C-S-s>", "<cmd>Telescope live_grep<CR>")
 map("n", "<C-S-f>", "<cmd>Telescope find_files<CR>", "Search for files")
+
+-- jump to definition
+map('n', 'gd', '<cmd>tab split | lua vim.lsp.buf.definition()<CR>')
+map('n', 'gt', '<cmd>tab split | lua vim.lsp.buf.type_definition()<CR>')
+
 -- indentation
 map("v", "<", "<gv")
 map("v", ">", ">gv")
@@ -146,36 +155,24 @@ map("n", "<C-S-Right>", "$", "Go to end of line")
 map("n", "<S-Left>", "B", "Previous word")
 map("n", "<S-Right>", "W", "Next word")
 
--- open file tree
-map({ "n", "v" }, "<C-a>", "<cmd>NeoTreeRevealToggle<cr>", "Toggle file explorer")
-
--- git history and blame
-map("n", "<C-b>", ":BlameToggle<CR>", "Toogle git blame")
-map("n", "<C-h>", ":DiffviewOpen origin/main<CR>", "View file history for the current branch")
-
--- git code owners
-map("n", "<C-o>", ":GhCoWho<CR>", "View file history for the current branch")
-
--- Neogen
-map("n", "<C-g>", ":Neogen<CR>", "Generate docstring template")
-
 -- Aerial
 map("n", "<C-e>", ":AerialToggle<CR>", "Generate docstring template")
 map("n", "ZZ", ":AerialClose<CR> <BAR> ZZ", "Rebind close & save to also close aerial")
 map("n", "ZQ", ":AerialClose<CR> <BAR> ZQ", "Rebind close to also close aerial")
 
+-- open file tree
+map({ "n", "v" }, "<C-a>", "<cmd>NeoTreeRevealToggle<cr>", "Toggle file explorer")
+
+-- git
+map("n", "<C-b>", ":BlameToggle<CR>", "Toogle git blame")
+map("n", "<C-o>", ":GhCoWho<CR>", "View file history for the current branch")
+
+-- Neogen
+map("n", "<C-g>", ":Neogen<CR>", "Generate docstring template")
+
 -- Wiki
 map("n", "<leader>w", "<leader>wt", "open wiki in new tab")
 
--- jump to definition
-map('n', 'gd', '<cmd>tab split | lua vim.lsp.buf.definition()<CR>')
-map('n', 'gt', '<cmd>tab split | lua vim.lsp.buf.type_definition()<CR>')
-
 -- Markdown
-map('n', '<leader>f', require('markdown-togglecheck').toggle, "Toggle checkmark")
 map('n', '<leader>x', function() vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('viwgsb', true, false, true), 'm', false) end, "Toggle bold on current word")
-
--- Copilot
-map("n", "<leader>c", ":CopilotChatToggle<CR>", "Open/close copilot chat window.")
-map("n", "<leader>C", ":CopilotChatReset<CR>", "Reset copilot chat window.")
 

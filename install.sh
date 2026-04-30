@@ -32,14 +32,17 @@ brew install CodeOne45/tap/vex
 brew install fx
 
 # diff so fancy
-curl -L -o /usr/local/bin/diff-so-fancy https://github.com/so-fancy/diff-so-fancy/releases/download/v1.4.8/diff-so-fancy
+curl -L -o /usr/local/bin/diff-so-fancy https://github.com/so-fancy/diff-so-fancy/releases/download/v1.4.10/diff-so-fancy
 git config --global core.pager "diff-so-fancy | less --tabs=4 -RF"
 git config --global interactive.diffFilter "diff-so-fancy --patch"
 
 curl -L -O https://github.com/lsd-rs/lsd/releases/download/v1.2.0/lsd-musl_1.2.0_amd64.deb
 sudo apt install -y ./lsd-musl_1.2.0_amd64.deb
 
-npm install -g tree-sitter-cli
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+source "$HOME/.cargo/env"
+cargo install tree-sitter-cli
+
 pip install pylatexenc
 
 # remove dock

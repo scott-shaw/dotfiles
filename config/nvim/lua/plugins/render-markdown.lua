@@ -42,6 +42,10 @@ return {
                 },
             },
 
+            latex = {
+                enabled = false,
+            },
+
             code = {
                 -- Turn on / off code block & inline code rendering
                 enabled = true,
@@ -137,9 +141,9 @@ return {
             },
         })
     end,
-    {
-        "nfrid/markdown-togglecheck",
-        dependencies = { "nfrid/treesitter-utils" },
-        ft = { "toggle-check-markdown" },
-    },
+    -- {
+    --     "nfrid/markdown-togglecheck",
+    --     dependencies = { "nfrid/treesitter-utils" },
+    --     ft = { "toggle-check-markdown" },
+    -- },
 }
