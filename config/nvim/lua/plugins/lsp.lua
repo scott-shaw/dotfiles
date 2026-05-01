@@ -29,7 +29,7 @@ return {
 	},
 	{
 		"neovim/nvim-lspconfig",
-		dependencies = { 'saghen/blink.cmp' },
+		dependencies = { "saghen/blink.cmp" },
 		lazy = false,
 		config = function()
 			-- Lua
@@ -56,7 +56,7 @@ return {
 					"--fallback-style=llvm",
 				},
 				filetypes = { "c", "cpp", "objc", "objcpp" },
-				init_option = { fallbackFlags = { '-std=c++20' } },
+				init_option = { fallbackFlags = { "-std=c++20" } },
 			})
 			vim.lsp.enable({ "clangd" })
 
@@ -72,14 +72,14 @@ return {
 							-- linter options
 							pylint = { enabled = false, executable = "pylint" },
 							pyflakes = { enabled = false },
-							pycodestyle = { enabled = true, maxLineLength=120, ignore={"E266", "W503", "E203"} },
-							ruff = { enabled = true, extendSelect={"I"}, format={"I"} },
+							pycodestyle = { enabled = true, maxLineLength = 120, ignore = { "E266", "W503", "E203" } },
+							ruff = { enabled = false, extendSelect = { "I" }, format = { "I" } },
 							-- type checker
 							pylsp_mypy = { enabled = false, live_mode = false, dmypy = true, report_progress = false },
 							-- auto-completion options
 							jedi_completion = { fuzzy = false },
 							-- import sorting
-							pyls_isort = { enabled = true },
+							pyls_isort = { enabled = false },
 						},
 					},
 				},
@@ -92,6 +92,62 @@ return {
 			-- Bash
 			vim.lsp.config("bashls", {})
 			vim.lsp.enable({ "bashls" })
+		end,
+	},
+	-- Conform: Formatter
+	{
+		"stevearc/conform.nvim",
+		keys = {
+			{
+				"<C-l>",
+				function()
+					require("conform").format({ lsp_fallback = true })
+				end,
+				mode = { "n", "v" },
+				desc = "Format file or range",
+			},
+		},
+		opts = {
+			formatters_by_ft = {
+				lua = { "stylua" },
+				python = { "black", "ruff_organize_imports", "ruff_format" },
+				sh = { "shfmt" },
+				bash = { "shfmt" },
+			},
+
+			formatters = {
+				black = {
+					prepend_args = { "--line-length", "120", "--preview" },
+				},
+			},
+		},
+	},
+	-- Nvim-lint: Linter
+	{
+		"mfussenegger/nvim-lint",
+		config = function()
+			local lint = require('lint')
+			lint.linters_by_ft = {
+				python = { "mypy" },
+				javascript = { "eslint_d" },
+			}
+
+			local mypy = lint.linters.mypy
+			mypy.args = {
+				"--ignore-missing-imports",
+				"--show-column-numbers",
+				"--show-error-codes",
+				"--hide-error-context",
+				"--no-color",
+				"--no-error-summary",
+			}
+
+			-- Trigger linting on save and buffer write
+			vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+				callback = function()
+					require("lint").try_lint()
+				end,
+			})
 		end,
 	},
 }
