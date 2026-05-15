@@ -8,6 +8,8 @@ guvcview
 htop
 neofetch
 clang
+libclang-dev
+cmake
 libeigen3-dev
 obs-studio
 wmctrl
